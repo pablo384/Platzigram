@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Platzigram</string>
+    <string name="title_activity_referencia">ReferenciaActivity</string>
+    <string name="hint_username">Nombre de Usuario</string>
+    <string name="hint_password">contraseña</string>
+    <string name="text_button_login">Login</string>
+    <string name="donHaveAcount">¿no tienes cuenta?</string>
+    <string name="create_here">Crea una aqui</string>
+    <string name="hint_email">email</string>
+    <string name="hint_name">nombre</string>
+    <string name="hint_user">Usuario</string>
+    <string name="hint_confirm_password">Confirmar Contrasena</string>
+    <string name="text_button_createAccount">Unete</string>
+    <string name="toolbar_title_createaccount">Crear Cuenta</string>
+    <string name="username_card">Uriel Ramirez</string>
+    <string name="firsword_card">Hace</string>
+    <string name="timecard_card">4 dias</string>
+    <string name="likenumbercard_card">10 Me Gusta</string>
+    <string name="tab_search">Buscar</string>
+    <string name="tab_home">Home</string>
+    <string name="tab_profile">Profile</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="secondwordDetail">Me Gusta</string>
+    <string name="tittleimage">\"Todo copas en la playa\"</string>
+    <string name="lorem">Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar textos como por ejemplo \"Contenido aquí, contenido aquí\". Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto, y al hacer una búsqueda de \"Lorem Ipsum\" va a dar por resultado muchos sitios web que usan este texto si se encuentran en estado de desarrollo. Muchas versiones han evolucionado a través de los años, algunas veces por accidente, otras veces a propósito (por ejemplo insertándole humor y cosas por el estilo).</string>
+    <string name="transicionName_picture">transitionnamepicture</string>
+</resources>
