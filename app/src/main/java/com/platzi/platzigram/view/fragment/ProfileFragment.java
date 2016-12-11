@@ -1,6 +1,7 @@
 package com.platzi.platzigram.view.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -11,10 +12,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.platzi.platzigram.LoginActivity;
 import com.platzi.platzigram.R;
 import com.platzi.platzigram.adapter.PictureAdapterRecyclerView;
 import com.platzi.platzigram.model.Picture;
+import com.platzi.platzigram.view.ContainerActivity;
 
 import java.util.ArrayList;
 
@@ -33,7 +38,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v=inflater.inflate(R.layout.fragment_profile, container, false);
+        final View v=inflater.inflate(R.layout.fragment_profile, container, false);
         showToolbar("",false,v);
 
         RecyclerView pictureRecycler=(RecyclerView) v.findViewById(R.id.pictureProfileRecycler);
@@ -49,6 +54,7 @@ public class ProfileFragment extends Fragment {
         PictureAdapterRecyclerView pictureAdapterRecyclerView=new
                 PictureAdapterRecyclerView(buidPictures(), R.layout.cardview_picture, getActivity());
         pictureRecycler.setAdapter(pictureAdapterRecyclerView);
+
 
         return v;
     }
@@ -71,5 +77,7 @@ public class ProfileFragment extends Fragment {
 
         return  list;
     }
+
+
 
 }

@@ -94,9 +94,8 @@
         app:layout_behavior="com.zoonref.SimpleViewBehavior"
         app:targetAlpha="1"
         app:targetY="@dimen/margintopTargetY_usernameToolbarprofile"
-
-
         />
+
 
 
 </android.support.design.widget.CoordinatorLayout>

@@ -28,6 +28,10 @@ public class LoginActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+//        if (firebaseAuth.getCurrentUser() != null){
+//            goHome();
+//        }
+
         final TextInputEditText etemail = (TextInputEditText)findViewById(R.id.username);
         final TextInputEditText etpassword = (TextInputEditText)findViewById(R.id.password);
         final ProgressBar progressBar=(ProgressBar) findViewById(R.id.progressBar_LoginActivity);
@@ -97,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
     public void goHome() {
         Intent i=new Intent(LoginActivity.this, ContainerActivity.class);
         startActivity(i);
+        finish();
     }
 
     public void goPlatzigram(View view) {
