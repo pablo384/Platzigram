@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -35,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
         final TextInputEditText etemail = (TextInputEditText)findViewById(R.id.username);
         final TextInputEditText etpassword = (TextInputEditText)findViewById(R.id.password);
         final ProgressBar progressBar=(ProgressBar) findViewById(R.id.progressBar_LoginActivity);
+        final TextInputLayout ltext1 = (TextInputLayout) findViewById(R.id.layoutEmail);
+        final TextInputLayout ltext2 = (TextInputLayout) findViewById(R.id.layoutPassword);
 
         final Button btnlogin=(Button)findViewById(R.id.login);
         btnlogin.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +49,8 @@ public class LoginActivity extends AppCompatActivity {
                 etemail.setVisibility(View.INVISIBLE);
                 etpassword.setVisibility(View.INVISIBLE);
                 btnlogin.setVisibility(View.INVISIBLE);
+                ltext1.setVisibility(View.INVISIBLE);
+                ltext2.setVisibility(View.INVISIBLE);
                 progressBar.setVisibility(View.VISIBLE);
 
                 if (email.equals("")){
@@ -53,6 +58,8 @@ public class LoginActivity extends AppCompatActivity {
                     etemail.setVisibility(View.VISIBLE);
                     etpassword.setVisibility(View.VISIBLE);
                     btnlogin.setVisibility(View.VISIBLE);
+                    ltext1.setVisibility(View.VISIBLE);
+                    ltext2.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.INVISIBLE);
                     return;
                 }
@@ -60,6 +67,8 @@ public class LoginActivity extends AppCompatActivity {
                     etemail.setVisibility(View.VISIBLE);
                     etpassword.setVisibility(View.VISIBLE);
                     btnlogin.setVisibility(View.VISIBLE);
+                    ltext1.setVisibility(View.VISIBLE);
+                    ltext2.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(LoginActivity.this, "Proporcione una COntrasena Valida", Toast.LENGTH_SHORT).show();
                     return;
@@ -77,11 +86,15 @@ public class LoginActivity extends AppCompatActivity {
                                     etemail.setVisibility(View.VISIBLE);
                                     etpassword.setVisibility(View.VISIBLE);
                                     btnlogin.setVisibility(View.VISIBLE);
+                                    ltext1.setVisibility(View.VISIBLE);
+                                    ltext2.setVisibility(View.VISIBLE);
                                     progressBar.setVisibility(View.INVISIBLE);
                                 }else {
                                     etemail.setVisibility(View.VISIBLE);
                                     etpassword.setVisibility(View.VISIBLE);
                                     btnlogin.setVisibility(View.VISIBLE);
+                                    ltext1.setVisibility(View.VISIBLE);
+                                    ltext2.setVisibility(View.VISIBLE);
                                     progressBar.setVisibility(View.INVISIBLE);
                                     goHome();
                                 }
