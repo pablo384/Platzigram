@@ -10,6 +10,8 @@ import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +49,7 @@ public class NewPostFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_new_post, container, false);
+        showToolbar(getResources().getString(R.string.new_post_title), false, v);
 
         imgPicture=(ImageView)v.findViewById(R.id.imageViewPicture);
         btnTakePicture=(Button) v.findViewById(R.id.btnTakePicture);
@@ -120,6 +123,13 @@ public class NewPostFragment extends Fragment {
         Uri contentURI= Uri.fromFile(Newfile);
         mediaScanIntent.setData(contentURI);
         getActivity().sendBroadcast(mediaScanIntent);
+    }
+    public void showToolbar(String tittle, boolean upButton, View view){
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(tittle);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(upButton);
+
     }
 
 
