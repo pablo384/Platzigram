@@ -18,7 +18,7 @@
         <item name="android:textColor">@android:color/white</item>
 
     </style>
-    
+
     <style name="EditTextWhite" parent="TextAppearance.AppCompat">
         <item name="android:textColorHighlight">@color/editTextColorWhite</item>
         <item name="android:textColorLink">@color/editTextColorWhite</item>
