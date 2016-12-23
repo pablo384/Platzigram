@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +20,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.platzi.platzigram.PlatzigramApplication;
 import com.platzi.platzigram.R;
+import com.platzi.platzigram.utils.Constants;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -39,6 +46,11 @@ public class NewPostFragment extends Fragment {
     static final int REQUEST_IMAGE_CAPTURE=1;
     String mCurrentPhotoPath;
 
+    String mCurrentAbsolutePhotoPath;
+    PlatzigramApplication app;
+    StorageReference storageReference;
+
+
     public NewPostFragment() {
         // Required empty public constructor
     }
@@ -53,6 +65,9 @@ public class NewPostFragment extends Fragment {
 
         imgPicture=(ImageView)v.findViewById(R.id.imageViewPicture);
         btnTakePicture=(Button) v.findViewById(R.id.btnTakePicture);
+
+        app = (PlatzigramApplication) getActivity().getApplicationContext();
+        storageReference = app.getStorageReference();
 
         btnTakePicture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,8 +86,31 @@ public class NewPostFragment extends Fragment {
             Picasso.with(getActivity()).load(mCurrentPhotoPath).into(imgPicture);
             addPicturetoGallery();
 
-            Toast.makeText(getActivity(), mCurrentPhotoPath, Toast.LENGTH_LONG).show();
+//            Toast.makeText(getActivity(), mCurrentPhotoPath, Toast.LENGTH_LONG).show();
+
+            uploadFIle();
         }
+    }
+
+    private void uploadFIle() {
+        File newFile = new File(mCurrentAbsolutePhotoPath);
+        Uri contentUri = Uri.fromFile(newFile);
+
+        StorageReference imagesReference = storageReference.child(Constants.FIREBASE_STORAGE_IMAGES+contentUri.getLastPathSegment());
+
+        UploadTask uploadTask = imagesReference.putFile(contentUri);
+
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getActivity(), "Error subiendo la imagen", Toast.LENGTH_LONG).show();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(getActivity(), taskSnapshot.getDownloadUrl().toString(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void takePicture() {
@@ -111,6 +149,7 @@ public class NewPostFragment extends Fragment {
         );
 
         mCurrentPhotoPath="file:"+image.getAbsolutePath();
+        mCurrentAbsolutePhotoPath= image.getAbsolutePath();
 
 
         return image;
