@@ -130,11 +130,12 @@ public class NewPostFragment extends Fragment {
         String email= pref.getString("email","");
         String enCodedEmail = email.replace(".",",");
 
-        HashMap<String, Object> timeStampCreated = new HashMap<>();
-        timeStampCreated.put("timestamp", ServerValue.TIMESTAMP);
 
-        Post post = new Post(enCodedEmail, imageURL, timeStampCreated);
+
+        Post post = new Post(enCodedEmail, imageURL, (double)new Date().getTime());
         postReference.push().setValue(post);
+
+        getFragmentManager().popBackStackImmediate();
 
 
     }

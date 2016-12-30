@@ -1,16 +1,21 @@
 package com.platzi.platzigram.model;
 
 
-import java.util.HashMap;
+import android.text.format.DateUtils;
+
+import java.util.Date;
 
 public class Post {
 
     public String uid;
     public String autor;
     public String imageURL;
-    public HashMap<String, Object> timeStampCreated;
+    public double timeStampCreated;
 
-    public Post(String autor, String imageURL, HashMap<String, Object> timeStampCreated) {
+    public Post() {
+    }
+
+    public Post(String autor, String imageURL, double timeStampCreated) {
         this.autor = autor;
         this.imageURL = imageURL;
         this.timeStampCreated = timeStampCreated;
@@ -32,11 +37,18 @@ public class Post {
         this.imageURL = imageURL;
     }
 
-    public HashMap<String, Object> getTimeStampCreated() {
+    public double getTimeStampCreated() {
         return timeStampCreated;
     }
-
-    public void setTimeStampCreated(HashMap<String, Object> timeStampCreated) {
+    public void setTimeStampCreated(double timeStampCreated) {
         this.timeStampCreated = timeStampCreated;
+    }
+    public String getRelativeTimeStamp(){
+
+        return DateUtils.getRelativeTimeSpanString(
+                (long)this.timeStampCreated,
+                System.currentTimeMillis(),
+                DateUtils.SECOND_IN_MILLIS,
+                DateUtils.FORMAT_ABBREV_WEEKDAY).toString();
     }
 }
