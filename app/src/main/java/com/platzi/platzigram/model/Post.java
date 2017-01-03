@@ -10,6 +10,7 @@ public class Post {
     public String uid;
     public String autor;
     public String imageURL;
+    public String relativeTimeStamp;
     public double timeStampCreated;
 
     public Post() {
@@ -43,6 +44,11 @@ public class Post {
     public void setTimeStampCreated(double timeStampCreated) {
         this.timeStampCreated = timeStampCreated;
     }
+
+    public void setRelativeTimeStamp(String relativeTimeStamp) {
+        this.relativeTimeStamp = relativeTimeStamp;
+    }
+
     public String getRelativeTimeStamp(){
 
         return DateUtils.getRelativeTimeSpanString(

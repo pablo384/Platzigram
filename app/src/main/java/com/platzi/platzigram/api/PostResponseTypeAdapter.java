@@ -25,6 +25,12 @@ public class PostResponseTypeAdapter extends TypeAdapter {
         ArrayList<Post> postList = new ArrayList<Post>();
         in.beginObject();
 
+//        if (in.equals("post")) {
+//            // read it
+//        } else {
+//            in.skipValue();
+//        }
+
         while (in.hasNext()){
             Post post = null;
             try {
@@ -57,6 +63,9 @@ public class PostResponseTypeAdapter extends TypeAdapter {
                     break;
                 case "imageURL":
                     post.setImageURL(reader.nextString());
+                    break;
+                case "relativeTimeStamp":
+                    post.setRelativeTimeStamp(reader.nextString());
                     break;
                 case "timeStampCreated":
                     post.setTimeStampCreated(reader.nextDouble());
