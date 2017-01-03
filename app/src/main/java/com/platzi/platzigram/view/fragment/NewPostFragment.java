@@ -2,6 +2,7 @@ package com.platzi.platzigram.view.fragment;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,10 +23,13 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.platzi.platzigram.PlatzigramApplication;
 import com.platzi.platzigram.R;
+import com.platzi.platzigram.model.Post;
 import com.platzi.platzigram.utils.Constants;
 import com.squareup.picasso.Picasso;
 
@@ -34,6 +38,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,6 +54,7 @@ public class NewPostFragment extends Fragment {
     String mCurrentAbsolutePhotoPath;
     PlatzigramApplication app;
     StorageReference storageReference;
+    DatabaseReference postReference;
 
 
     public NewPostFragment() {
@@ -68,6 +74,7 @@ public class NewPostFragment extends Fragment {
 
         app = (PlatzigramApplication) getActivity().getApplicationContext();
         storageReference = app.getStorageReference();
+        postReference = app.getPostReference();
 
         btnTakePicture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,8 +116,28 @@ public class NewPostFragment extends Fragment {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Toast.makeText(getActivity(), taskSnapshot.getDownloadUrl().toString(), Toast.LENGTH_LONG).show();
+
+                String imageURL = taskSnapshot.getDownloadUrl().toString();
+
+                createNewpost(imageURL);
             }
         });
+    }
+
+    private void createNewpost(String imageURL) {
+
+        SharedPreferences pref = getActivity().getSharedPreferences("USER", getActivity().MODE_PRIVATE);
+        String email= pref.getString("email","");
+        String enCodedEmail = email.replace(".",",");
+
+
+
+        Post post = new Post(enCodedEmail, imageURL, (double)new Date().getTime());
+        postReference.push().setValue(post);
+
+        getFragmentManager().popBackStackImmediate();
+
+
     }
 
     private void takePicture() {
